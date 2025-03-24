@@ -1,0 +1,181 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0hi3vnjelpse"]
+
+[ext_resource type="Script" path="res://node_2d.gd" id="1_enlu6"]
+[ext_resource type="Script" path="res://Main.gd" id="1_v75m1"]
+[ext_resource type="PackedScene" uid="uid://eywirbkdlg8t" path="res://player.tscn" id="2_iuc8h"]
+[ext_resource type="FontFile" uid="uid://reisaik5y73s" path="res://Fredoka-Medium.ttf" id="3_m1k5f"]
+[ext_resource type="PackedScene" uid="uid://bcwb2l767ivmm" path="res://enemy.tscn" id="5_s4kqo"]
+
+[sub_resource type="Curve" id="Curve_ji6x5"]
+min_value = 2.0
+max_value = 10.0
+_data = [Vector2(0, 0.690029), 0.0, 0.0, 0, 0, Vector2(1e-05, 2), 0.0, 0.0, 0, 0, Vector2(0.99998, 10), 0.0, 0.0, 0, 0, Vector2(0.99999, 20), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+metadata/_snap_enabled = true
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_v75m1")
+enemy_scene = ExtResource("5_s4kqo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="spiral" type="Node2D" parent="." node_paths=PackedStringArray("line", "static_body")]
+script = ExtResource("1_enlu6")
+line = NodePath("spiral_body/Line2D")
+static_body = NodePath("spiral_body")
+
+[node name="spiral_body" type="StaticBody2D" parent="spiral"]
+
+[node name="Line2D" type="Line2D" parent="spiral/spiral_body"]
+points = PackedVector2Array(980, -438)
+width_curve = SubResource("Curve_ji6x5")
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="player" parent="." instance=ExtResource("2_iuc8h")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Skill Container" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="skillcontainer" type="MarginContainer" parent="CanvasLayer/Skill Container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -292.5
+offset_top = -171.0
+offset_right = 292.5
+offset_bottom = 171.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cardcontainer" type="VBoxContainer" parent="CanvasLayer/Skill Container/skillcontainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="HCards" type="HBoxContainer" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="FireRateCard" type="VBoxContainer" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards/FireRateCard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_m1k5f")
+theme_override_font_sizes/font_size = 48
+text = "Fire Rate + 1  
+"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards/FireRateCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.639216, 0.290196, 1, 1)
+theme_override_fonts/font = ExtResource("3_m1k5f")
+theme_override_font_sizes/font_size = 48
+text = "upgrade
+"
+
+[node name="LifeCard" type="VBoxContainer" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards/LifeCard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_m1k5f")
+theme_override_font_sizes/font_size = 48
+text = "One more life"
+
+[node name="Button" type="Button" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards/LifeCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.639216, 0.290196, 1, 1)
+theme_override_fonts/font = ExtResource("3_m1k5f")
+theme_override_font_sizes/font_size = 48
+text = "upgrade
+"
+
+[node name="HCards2" type="HBoxContainer" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="SpeedCard" type="VBoxContainer" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards2/SpeedCard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_m1k5f")
+theme_override_font_sizes/font_size = 48
+text = "Speed + 1"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards2/SpeedCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.639216, 0.290196, 1, 1)
+theme_override_fonts/font = ExtResource("3_m1k5f")
+theme_override_font_sizes/font_size = 48
+text = "upgrade
+"
+
+[node name="HandlingCard" type="VBoxContainer" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards2/HandlingCard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_m1k5f")
+theme_override_font_sizes/font_size = 48
+text = "Better Handling"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/Skill Container/skillcontainer/Cardcontainer/HCards2/HandlingCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.639216, 0.290196, 1, 1)
+theme_override_fonts/font = ExtResource("3_m1k5f")
+theme_override_font_sizes/font_size = 48
+text = "upgrade
+"
+
+[node name="Score Container" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 95.0
+offset_bottom = 99.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Score Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Score Container/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.639216, 0.290196, 1, 1)
+theme_override_fonts/font = ExtResource("3_m1k5f")
+theme_override_font_sizes/font_size = 48
+text = "*"
+
+[node name="score" type="Label" parent="CanvasLayer/Score Container/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.639216, 0.290196, 1, 1)
+theme_override_fonts/font = ExtResource("3_m1k5f")
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="spawntimer" type="Timer" parent="."]
+wait_time = 2.5
+
+[connection signal="timeout" from="spawntimer" to="." method="_on_spawntimer_timeout"]

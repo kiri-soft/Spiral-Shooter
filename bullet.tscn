@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5qedbhvqm2ds"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_4v535"]
+[ext_resource type="AudioStream" uid="uid://dl8y3qst8qcff" path="res://random (1).wav" id="2_yxylh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fq62x"]
+radius = 8.0
+
+[node name="bullet" type="Area2D"]
+script = ExtResource("1_4v535")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(0, -7.14286)
+scale = Vector2(1, 0.952381)
+points = PackedVector2Array(0, 7, 0, 8)
+width = 15.0
+default_color = Color(0.639216, 0.290196, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fq62x")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="enemy dead sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_yxylh")
+volume_db = -6.625
+pitch_scale = 0.98
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

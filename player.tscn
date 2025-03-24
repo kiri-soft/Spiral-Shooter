@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://eywirbkdlg8t"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_i5khe"]
+[ext_resource type="PackedScene" uid="uid://c5qedbhvqm2ds" path="res://bullet.tscn" id="2_kw5lo"]
+[ext_resource type="AudioStream" uid="uid://dl0ijdyqpyx6p" path="res://080977_bullet-39804.mp3" id="3_lnah7"]
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(150, 133)
+script = ExtResource("1_i5khe")
+bullet_scene = ExtResource("2_kw5lo")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-18, 20.4)
+scale = Vector2(1.04348, 0.97561)
+color = Color(0.639216, 0.290196, 1, 1)
+polygon = PackedVector2Array(1.91666, -46.125, 1.91666, 3.075, 40.2499, -21.525)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-8, 15.4)
+polygon = PackedVector2Array(-8, -40, -8, 8, 32, -16)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -0.199997)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-18, 20.6)
+polygon = PackedVector2Array(1, -46.4, 1, 4.59999, 42, -20.4, 42, -21.4)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(22, -0.599991)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="gunsfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lnah7")
+volume_db = -27.882
+pitch_scale = 1.41
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

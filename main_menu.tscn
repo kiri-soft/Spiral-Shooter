@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq3iwcct8u7qg"]
+
+[ext_resource type="FontFile" uid="uid://reisaik5y73s" path="res://Fredoka-Medium.ttf" id="1_oyfbv"]
+[ext_resource type="Script" path="res://main_menu.gd" id="1_qdypw"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qdypw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -330.0
+offset_right = 330.0
+offset_bottom = 100.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_oyfbv")
+theme_override_font_sizes/font_size = 72
+text = "[ SPIRAL SHOOTER ]
+"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.53449, 0.00369779, 0.950438, 1)
+theme_override_fonts/font = ExtResource("1_oyfbv")
+theme_override_font_sizes/font_size = 48
+text = "Start"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_oyfbv")
+theme_override_font_sizes/font_size = 32
+text = "Made by Kiri:3
+"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.345098)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_oyfbv")
+theme_override_font_sizes/font_size = 28
+text = "Avoid spiral and kill enemies to score :3
+WASD to move 
+LMB to shoot
+"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
